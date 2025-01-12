@@ -7,7 +7,7 @@ export default {
         'node_modules/(?!(lodash-es)/)'
     ],
     testMatch: [
-        "**/src/**/*.test.js"
+        "*/src//.test.js"
     ],
     setupFilesAfterEnv: ['<rootDir>/jest.setup.js']
 }
