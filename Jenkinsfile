@@ -5,6 +5,9 @@ pipeline {
         string(name: 'Motivo', defaultValue: '', description: 'Motivo para ejecutar la pipeline')
         string(name: 'ChatID', defaultValue: '', description: 'Chat ID de Telegram para notificaciones')
     }
+    tools {
+    nodejs 'Node'
+    }
     stages {
         stage('Peticion de datos') {
             steps {
@@ -14,6 +17,26 @@ pipeline {
                     echo "Chat ID: ${params.ChatID}"
                 }
             }
+        }
+        stage('Linter') {
+            steps {
+                script {
+                    echo "Running linter..."
+                    sh 'npm install'
+                    sh 'npx eslint . --ext .js,.jsx || exit 1'
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Pipeline completed.'
+        }
+        success {
+            echo 'Pipeline executed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed.'
         }
     }
 }
