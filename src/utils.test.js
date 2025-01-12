@@ -1,4 +1,4 @@
-const { expect, test } = require('@jest/globals');
+import { expect, test } from '@jest/globals';
 
 import { add, isEven, capitalize } from './utils';
 
